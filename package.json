@@ -1,6 +1,6 @@
 {
   "name": "playwright-html-data-reporter",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Playwright reporter that makes the data used for it's html-reporter accessible",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
