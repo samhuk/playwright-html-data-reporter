@@ -1,7 +1,7 @@
 {
-  "name": "{{npm-package-name}}",
+  "name": "playwright-html-data-reporter",
   "version": "0.0.1",
-  "description": "{{package-slogan}}",
+  "description": "Playwright reporter that makes the data used for it's html-reporter accessible",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -12,21 +12,7 @@
     "build-unit-tests": "tsc -p ./tsconfig.unit-tests.json",
     "run-unit-tests": "jest",
     "unit-tests": "npm run clean-unit-tests && npm run build-unit-tests && npm run run-unit-tests",
-
-    "clean-integration-tests": "rimraf ./build-integration-test",
-    "build-integration-tests": "tsc -p ./tsconfig.integration-tests.json",
-    "run-integration-tests-ci": "node ./build-integration-test/integrationTests/index.js",
-    "run-integration-tests": "env-cmd -e integration-tests node ./build-integration-test/integrationTests/index.js",
-    "integration-tests-ci": "npm run clean-integration-tests && npm run build-integration-tests && npm run run-integration-tests-ci",
-    "integration-tests": "npm run clean-integration-tests && npm run build-integration-tests && npm run run-integration-tests",
-
-    "clean-tests": "npm run clean-unit-tests && npm run clean-integration-tests",
-    "build-tests": "npm run build-unit-tests && npm run build-integration-tests",
-    "run-tests": "npm run run-unit-tests && npm run run-integration-tests",
-    "run-tests-ci": "npm run run-unit-tests && npm run run-integration-tests-ci",
-    "tests": "npm run clean-tests && npm run build-tests && npm run run-tests",
-    "tests-ci": "npm run clean-tests && npm run build-tests && npm run run-tests-ci",
-
+    
     "lint": "eslint -c .eslintrc.json ./src --ext .ts",
     "lint-errors-only": "eslint -c .eslintrc.json ./src --ext .ts --quiet",
 
@@ -36,22 +22,25 @@
     "clean-ts": "rimraf ./build-ts",
     "build-ts": "npm run clean-ts && tsc -p ./tsconfig.all.json",
 
-    "clean-examples": "rimraf ./build-examples",
-    "build-examples": "tsc -p ./tsconfig.examples.json",
-
-    "clean": "npm run clean-unit-tests && npm run clean-integration-tests && npm run clean-ts && npm run clean-ts-dist && npm run clean-examples",
-
-    "check": "npm rum lint-errors-only && npm run build-ts && npm run tests && echo Done!"
+    "clean": "npm run clean-unit-tests && npm run clean-ts && npm run clean-ts-dist",
+    "check": "npm rum lint-errors-only && npm run build-ts && echo Done!"
   },
-  "repository": "https://github.com/{{github-user-name}}/{{package-name}}",
-  "author": "",
+  "repository": "https://github.com/samhuk/playwright-html-data-reporter",
+  "author": {
+    "name": "Sam Hughes",
+    "email": "samhughes1701@hotmail.co.uk",
+    "url": "http://samhuk.com/about"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/samhuk"
+  },
   "license": "MIT",
   "publishConfig": {
     "access": "public"
   },
-  "dependencies": {
-  },
   "devDependencies": {
+    "@playwright/test": "^1.29.2",
     "@types/jest": "^29.1.2",
     "@types/node": "^18.8.3",
     "@types/pg": "^8.6.5",
@@ -64,10 +53,16 @@
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsx-a11y": "^6.6.1",
-    "eslint-plugin-react": "^7.31.9",
     "jest": "^29.1.2",
     "rimraf": "^3.0.2",
     "ts-jest": "^29.0.3",
     "typescript": "^4.8.4"
-  }
+  },
+  "keywords": [
+    "rplaywright",
+    "html",
+    "reporter",
+    "html-reporter",
+    "data"
+  ]
 }

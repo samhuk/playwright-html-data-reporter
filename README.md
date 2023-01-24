@@ -1,54 +1,45 @@
-# ts-npm-package-template
-
-This is a template repository for a Typescript NPM package. It contains Typescript, ESLint, Jest and VSCode integrations.
-
-## Usage
-
-1. Click the "**Use Template**" button on Github to create your own repository from this template
-2. Locally clone your new remote Github repository
-3. From the root directory of your new local clone, run `node setup.js`, entering in some details.
-4. After it completes, you can remove `setup.js` and this section of the README.
-5. For information on how to develop on your new codebase, see [./contributing/development.md](./contributing/development.md)
-6. Have fun!
-
-This template is approximately based off of [ts-pg-orm](https://github.com/samhuk/ts-pg-orm). Therefore, feel free to take a look at that to see how this template can be expanded upon.
-
-If you found this delightful, feel free to [buy me a coffee](https://www.buymeacoffee.com/samhuk) ✨
-
----
-
-<h1 align="center">{{package-name}}</h1>
+<h1 align="center">playwright-html-data-reporter</h1>
 <p align="center">
-  <em>{{package-slogan}}</em>
+  <em>Playwright reporter that makes the data used for it's html-reporter accessible</em>
 </p>
 
-> Badges like license type, current build status, and npm package version info can go here. Uncomment the HTML below within this README to show them.
-
-<!-- <p align="center">
-  <a href="https://github.com/{{github-user-name}}/{{package-name}}/actions/workflows/ci.yaml/badge.svg" target="_blank">
-    <img src="https://github.com/{{github-user-name}}/{{package-name}}/actions/workflows/ci.yaml/badge.svg" alt="ci status" />
+<p align="center">
   </a>
   <a href="https://img.shields.io/badge/License-MIT-green.svg" target="_blank">
     <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="license" />
   </a>
-  <a href="https://badge.fury.io/js/{{npm-package-name}}.svg" target="_blank">
-    <img src="https://badge.fury.io/js/{{npm-package-name}}.svg" alt="npm version" />
+  <a href="https://badge.fury.io/js/playwright-html-data-reporter.svg" target="_blank">
+    <img src="https://badge.fury.io/js/playwright-html-data-reporter.svg" alt="npm version" />
   </a>
-</p> -->
+</p>
 
 ## Overview
 
-> Provide a quick overview of what your package does.
+This package provides a [Playwright Reporter](https://playwright.dev/docs/test-reporters#custom-reporters) that makes the data that their [HTML Reporter](https://playwright.dev/docs/test-reporters#html-reporter) produces and uses easily accessible.
 
-> If it is a large package, put a "Getting Started" wiki page link here.
+## Usage
 
-## Usage Overview
+```typescript
+import { PlaywrightTestConfig } from '@playwright/test/types/test'
 
-> Briefly show what using your package looks like. Try to omit as much configuration as possible as your package wiki can detail that.
+const playwrightConfig: PlaywrightTestConfig = {
+  ...
+  reporter: [
+    ['html', { open: 'never', outputFolder: './my-playwright-results' }],
+    ['playwright-html-data-reporter', { outputFile: 'data.txt' }],
+  ],
+  ...
+}
+// Observe file at './my-playwright-results/data.txt' containing the data that the HTML Reporter uses
+```
 
-## Examples
+## Why
 
-> Mention where any usage examples are, either within the repository or externally hosted.
+This package makes it easier to display Playwright test results in third-party apps.
+
+Currently, their HTML Reporter does not expose how it produces it's data, nor makes it available via config, nor makes it otherwise easily accessible, instead only embedding it within it's "self-contained report" `index.html` file. This data, which is a zip-compressed, base-64-encoded string, can then be read and fed into front-end components like their [ReportView](https://github.com/microsoft/playwright/blob/main/packages/html-reporter/src/reportView.tsx) or a completely different component.
+
+This comes off of the declination of [a request](https://github.com/microsoft/playwright/issues/20274) to make that data and the React component the HTML Reporter uses to render it accessible. If/when this is accepted in the future, this package can likely be deprecated.
 
 ## Development
 
@@ -56,8 +47,4 @@ See [./contributing/development.md](./contributing/development.md)
 
 ---
 
-> If desired, briefly mention any donation links here. Here's Buy Me a Coffee as an example:
-
-If you found this package delightful, feel free to buy me a coffee ✨
-
-<a href="https://www.buymeacoffee.com/{{buy-me-a-coffee-user-name}}" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+<a href="https://www.buymeacoffee.com/samhuk" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
