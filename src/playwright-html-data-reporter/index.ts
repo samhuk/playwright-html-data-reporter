@@ -97,12 +97,12 @@ export const getResults = async (
 }
 
 export class HtmlReporterDataReporter implements Reporter {
-  config: HtmlReporterDataReporterConfig
+  config: HtmlReporterDataReporterConfig | null
   htmlReporterConfig: HtmlReporterConfig
   outputDir: string
   fullConfig: FullConfigInternal
 
-  constructor(_config: HtmlReporterDataReporterConfig) {
+  constructor(_config: HtmlReporterDataReporterConfig | null) {
     this.config = _config
   }
 
@@ -119,7 +119,7 @@ export class HtmlReporterDataReporter implements Reporter {
       return
     }
 
-    const outputFilePath = path.join(this.outputDir, this.config.outputFileName ?? DEFAULT_CONFIG.outputFileName)
+    const outputFilePath = path.join(this.outputDir, this.config?.outputFileName ?? DEFAULT_CONFIG.outputFileName)
     fs.writeFileSync(outputFilePath, results)
   }
 }
